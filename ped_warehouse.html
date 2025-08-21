@@ -29,7 +29,7 @@
   <main class="container mx-auto px-6 py-12">
     <div class="space-y-10">
       <div id="category-transfer">
-        <h2 class="text-2xl font-bold text-gray-700 border-b-2 border-blue-400 pb-2 mb-4">異動用書類 (赴任・転任など)</h2>
+        <h2 class="text-2xl font-bold text-gray-700 border-b-2 border-blue-400 pb-2 mb-4">異動用書類 (赴任・転任・留学など)</h2>
         <div id="list-transfer" class="space-y-4"></div>
       </div>
       <div id="category-department">
@@ -45,10 +45,16 @@
 
   <script>
     const documents = [
-      { category:'transfer', filename:'funin_todoke.docx', displayName:'赴任届', description:'新しく関連病院へ赴任した際に提出する書類です。着任後速やかに提出してください。' },
-      { category:'transfer', filename:'tennin_todoke.docx', displayName:'転任届', description:'関連病院間で異動（転任）する際に提出する書類です。異動が確定次第、提出してください。' },
-      { category:'department', filename:'nyukyoku_todoke.pdf', displayName:'入局届', description:'医局へ新しく入局する際に必要な書類です。見学後、教授面談を経て提出してください。' },
-      { category:'department', filename:'taikyoku_todoke.pdf', displayName:'退局届', description:'医局を退局する際に提出します。退局希望日の3ヶ月前までに医局長へご相談ください。' },
+      { category:'transfer', filename:'funin_negai.docx', displayName:'赴任願', description:'名大病院から関連病院へ赴任する際に提出する書類です。人事が決まる医局会の前までに、提出してください。' },
+      { category:'transfer', filename:'kikyoku_negai.docx', displayName:'帰局願', description:'関連病院から名大病院へ赴任する際に提出する書類です。人事が決まる医局会の前までに、提出してください。' },
+      { category:'transfer', filename:'questionnaire_fellow.docx', displayName:'フェローアンケート', description:'フェローとして帰局する際に、帰局願とともに提出する書類です。人事が決まる医局会の前までに、提出してください。' },
+      { category:'transfer', filename:'syukkou_negai.docx', displayName:'出向願', description:'名大病院から出向する際に提出する書類です。人事が決まる医局会の前までに、提出してください。' },
+      { category:'transfer', filename:'tennin_negai.docx', displayName:'転任願', description:'関連病院間で異動（転任）する際に提出する書類です。異動が内定（人事決定の前）し次第、提出してください。' },
+      { category:'transfer', filename:'ryugaku_negai.docx', displayName:'留学願', description:'国内・国外留学をする際に提出する書類です。人事が決まる医局会の前までに、提出してください。' },
+      { category:'department', filename:'nyukyoku_negai.pdf', displayName:'入局願', description:'医局へ入局を希望する際に提出する書類です。' },
+      { category:'department', filename:'taikyoku_negai.pdf', displayName:'退局願', description:'医局を退局を希望する際に提出する書類です。退局を希望される場合は、事前に医局長へご相談ください。' },
+      { category:'department', filename:'kyukyoku_negai.pdf', displayName:'休局願', description:'休局を希望する際に提出する書類です。究極を希望される場合は、事前に医局長へご相談ください。' },
+      { category:'department', filename:'fukukyoku_negai.pdf', displayName:'復局願', description:'休局されている方が復帰を希望する際に提出する書類です。復局を希望される場合は、事前に医局長へご相談ください。' },
     ];
 
     const transferList=document.getElementById('list-transfer');
@@ -98,3 +104,4 @@
   </script>
 </body>
 </html>
+
