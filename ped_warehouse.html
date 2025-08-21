@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>名大小児科の倉庫</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter','Noto Sans JP',sans-serif; }
+    .accordion-content { max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; }
+  </style>
+</head>
+<body class="bg-gray-100">
+  <header class="bg-white shadow">
+    <div class="container mx-auto px-6 py-5 flex justify-between items-center">
+      <div>
+        <h1 class="text-2xl font-bold text-gray-800 border-b-2 border-blue-400 inline-block pb-1">名大小児科の倉庫</h1>
+        <p class="text-gray-500 text-sm mt-1">医局員向け 各種書類</p>
+      </div>
+      <a href="./index.html" class="inline-block bg-gray-700 hover:bg-gray-800 text-white font-bold py-2 px-4 rounded-lg shadow-md transition">
+        &larr; トップに戻る
+      </a>
+    </div>
+  </header>
+
+  <main class="container mx-auto px-6 py-12">
+    <div class="space-y-10">
+      <div id="category-transfer">
+        <h2 class="text-2xl font-bold text-gray-700 border-b-2 border-blue-400 pb-2 mb-4">異動用書類 (赴任・転任など)</h2>
+        <div id="list-transfer" class="space-y-4"></div>
+      </div>
+      <div id="category-department">
+        <h2 class="text-2xl font-bold text-gray-700 border-b-2 border-green-400 pb-2 mb-4">医局関連届 (入局・退局など)</h2>
+        <div id="list-department" class="space-y-4"></div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="py-8 mt-12 bg-gray-900 text-gray-200 text-center text-sm">
+    <p>&copy; 2025 Nagoya University Department of Pediatrics. All Rights Reserved.</p>
+  </footer>
+
+  <script>
+    const documents = [
+      { category:'transfer', filename:'funin_todoke.docx', displayName:'赴任届', description:'新しく関連病院へ赴任した際に提出する書類です。着任後速やかに提出してください。', submissionUrl:'https://forms.example.com/submit_transfer' },
+      { category:'transfer', filename:'tennin_todoke.docx', displayName:'転任届', description:'関連病院間で異動（転任）する際に提出する書類です。異動が確定次第、提出してください。', submissionUrl:'https://forms.example.com/submit_transfer' },
+      { category:'department', filename:'nyukyoku_todoke.pdf', displayName:'入局届', description:'医局へ新しく入局する際に必要な書類です。見学後、教授面談を経て提出してください。', submissionUrl:'https://forms.example.com/submit_department' },
+      { category:'department', filename:'taikyoku_todoke.pdf', displayName:'退局届', description:'医局を退局する際に提出します。退局希望日の3ヶ月前までに医局長へご相談ください。', submissionUrl:'https://forms.example.com/submit_department' },
+    ];
+
+    const transferList=document.getElementById('list-transfer');
+    const departmentList=document.getElementById('list-department');
+
+    function generateDocumentList(){
+      documents.forEach(doc=>{
+        const html=`
+          <div class="bg-white rounded-xl shadow-md overflow-hidden transition transform hover:-translate-y-0.5">
+            <button class="accordion-toggle w-full p-5 text-left flex justify-between items-center bg-gray-50 hover:bg-gray-100 transition">
+              <span class="font-semibold text-lg text-gray-800">${doc.displayName}</span>
+              <svg class="w-6 h-6 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+              </svg>
+            </button>
+            <div class="accordion-content">
+              <div class="p-5 border-t border-gray-200">
+                <p class="text-gray-600 mb-4">${doc.description}</p>
+                <div class="flex flex-col sm:flex-row gap-4">
+                  <a href="./documents/${doc.filename}" download="${doc.filename}" class="flex-1 text-center bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg shadow-md transition">
+                    ダウンロード
+                  </a>
+                  <a href="${doc.submissionUrl}" target="_blank" rel="noopener noreferrer" class="flex-1 text-center bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-lg shadow-md transition">
+                    提出先はこちら
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>`;
+        if(doc.category==='transfer'){ transferList.innerHTML+=html; }
+        else if(doc.category==='department'){ departmentList.innerHTML+=html; }
+      });
+
+      document.querySelectorAll('.accordion-toggle').forEach(button=>{
+        button.addEventListener('click',()=>{
+          const content=button.nextElementSibling;
+          const icon=button.querySelector('svg');
+          if(content.style.maxHeight){
+            content.style.maxHeight=null;
+            icon.classList.remove('rotate-180');
+          }else{
+            content.style.maxHeight=content.scrollHeight+"px";
+            icon.classList.add('rotate-180');
+          }
+        });
+      });
+    }
+    window.onload=generateDocumentList;
+  </script>
+</body>
+</html>
