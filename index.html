@@ -92,6 +92,7 @@
     loginForm.addEventListener('submit', e => {
       e.preventDefault();
       if (passwordInput.value === CORRECT_PASSWORD) {
+        sessionStorage.setItem('isLoggedIn', 'true'); 
         loginSection.style.display = 'none';
         mainContent.classList.remove('hidden');
       } else {
@@ -104,4 +105,5 @@
   </script>
 </body>
 </html>
+
 
