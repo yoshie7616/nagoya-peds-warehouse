@@ -14,6 +14,12 @@
   </style>
 </head>
 <body class="bg-gray-100">
+  <script>
+    if (sessionStorage.getItem('isLoggedIn') !== 'true') {
+      // ログインしていない場合は、トップページに強制的に戻す
+      window.location.href = './index.html';
+    }
+  </script>
   <header class="bg-white shadow">
     <div class="container mx-auto px-6 py-5 flex justify-between items-center">
       <div>
@@ -104,6 +110,7 @@
   </script>
 </body>
 </html>
+
 
 
 
